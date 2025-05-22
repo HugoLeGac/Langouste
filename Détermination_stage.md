@@ -16,7 +16,7 @@ output_folder = input_folder
 nc_files = glob(os.path.join(input_folder, "*.nc"))
 ```
 
-# Boucle 
+# Boucle de détermination du stage 7
 ```
 for input_path in nc_files:
     filename = os.path.splitext(os.path.basename(input_path))[0]
