@@ -1,17 +1,20 @@
 # Packages
+```
 import xarray as xr
 import numpy as np
 import pandas as pd
 import os
 from glob import glob
+```
 
 # Pass way directory
-input_folder = "E:/Hugo/Stage/Stage_M2/Mars/Dispersion/Dispersion_active/2022/Juin"
+```input_folder = "E:/Hugo/Stage/Stage_M2/Mars/Dispersion/Dispersion_active/2022/Juin"
 output_folder = input_folder 
 
 nc_files = glob(os.path.join(input_folder, "*.nc"))
-
+```
 # Boucle 
+'''
 for input_path in nc_files:
     filename = os.path.splitext(os.path.basename(input_path))[0]
 
@@ -52,3 +55,4 @@ for input_path in nc_files:
 
     except Exception as e:
         print(f"❌ Erreur avec le fichier {filename}: {e}")
+'''
