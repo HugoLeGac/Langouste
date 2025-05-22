@@ -1,4 +1,4 @@
-# Packages 
+# PACKAGES
 ```
 import pandas as pd
 import geopandas as gpd
@@ -11,7 +11,7 @@ import os
 from pandas.errors import EmptyDataError
 ```
 
-# Pass way directory
+# PASS WAY DIRECTORY
 ```
 base_path = "C:/Users/UTILISATEUR/Documents/cours/M2/S10/Stage/Stage_M2/Mars/Dispersion/Dispersion_active/2013/Fevrier"
 ```
@@ -22,7 +22,7 @@ A télécharger au préalable sur CMEMS
 fichier_bathymetrie = "C:/Users/UTILISATEUR/Documents/cours/M2/S10/Stage/Stage_M2/Mars/Dispersion/Dispersion_active/gebco_2024_n50.0_s47.0_w-5.6_e-1.3.nc"
 ```
 
-# === CHARGEMENT DE LA BATHYMÉTRIE ===
+# CHARGEMENT DE LA BATHYMÉTRIE
 ```
 ds = xr.open_dataset(fichier_bathymetrie)
 lon_bathy = ds['lon'].values
@@ -44,13 +44,13 @@ zones = {
 zones_gdf = gpd.GeoDataFrame({'zone': list(zones.keys()), 'geometry': list(zones.values())}, crs='EPSG:4326')
 ```
 
-# === FOND DE CARTE ===
+# FOND DE CARTE 
 ```
 world = gpd.read_file("https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson")
 france = world[world['ADMIN'] == 'France']
 ```
 
-# === COULEURS DES ZONES ===
+# COULEURS DES ZONES
 ```
 zone_colors = {
     'Manche_ouest': 'red',
@@ -61,7 +61,7 @@ zone_colors = {
 }
 ```
 
-# === TRAITEMENT DE TOUS LES FICHIERS CSV ===
+# TRAITEMENT DE TOUS LES FICHIERS CSV
 ```
 for file in os.listdir(base_path):
     if file.endswith("00.csv") and file.startswith("Position_"):
