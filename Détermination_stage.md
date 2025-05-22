@@ -15,7 +15,7 @@ nc_files = glob(os.path.join(input_folder, "*.nc"))
 ```
 
 # Boucle 
-'''
+```
 for input_path in nc_files:
     filename = os.path.splitext(os.path.basename(input_path))[0]
 
