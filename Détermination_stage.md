@@ -13,6 +13,7 @@ output_folder = input_folder
 
 nc_files = glob(os.path.join(input_folder, "*.nc"))
 ```
+
 # Boucle 
 '''
 for input_path in nc_files:
