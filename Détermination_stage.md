@@ -56,4 +56,4 @@ for input_path in nc_files:
 
     except Exception as e:
         print(f"❌ Erreur avec le fichier {filename}: {e}")
-'''
+```
