@@ -116,10 +116,16 @@ analyse_fichier <- function(nom_fichier) {
 ```
 
 # Traiter tous les fichiers valides
+```
 tableau_final <- do.call(rbind, lapply(fichiers_valides, analyse_fichier))
+```
 
-# Sauvegarder les résultats en cqv
+# Sauvegarder les résultats en csv
+```
 write.table(tableau_final,  file.path(dossier,"resultats_connectivite_stade7.csv"), sep = ";", row.names = FALSE)
+```
 
 # Afficher un aperçu du tableau final pour avoir une idée du rendu
+```
 print(head(tableau_final))
+```
