@@ -60,7 +60,7 @@ for (fichier in fichiers) {
 df_final <- bind_rows(resultats)
 ```
 
-# === Calculer la quantité totale de particules par zone et station
+# Calculer la quantité totale de particules par zone et station
 ```
 df_site_zone <- df_final %>%
   group_by(Zone, Site) %>%
@@ -72,21 +72,21 @@ df_site_zone <- df_final %>%
   ungroup()
 ```
 
-# === Totaux par zone pour les proportions internes à chaque zone
+# Totaux par zone pour les proportions internes à chaque zone
 ```
 df_zone_totals <- df_site_zone %>%
   group_by(Zone) %>%
   summarise(Total_zone = sum(Total_particules))
 ```
 
-# === Fusionner les totaux par zone avec les données par station
+# Fusionner les totaux par zone avec les données par station
 ```
 df_site_zone <- df_site_zone %>%
   left_join(df_zone_totals, by = "Zone") %>%
   mutate(Proportion = Total_particules / Total_zone)
 ```
 
-# === Test statistique : Kruskal-Wallis pour entre chaque site
+# Test statistique : Kruskal-Wallis pour entre chaque site
 ```
 p_values <- df_site_zone %>%
   group_by(Zone) %>%
@@ -122,7 +122,7 @@ ggplot(df_site_zone, aes(x = Zone, y = Total_particules, fill = Site)) +
   scale_fill_manual(values = palette_sites)
 ```
 
-# === Calculer la proportion globale de chaque
+# Calculer la proportion globale de chaque
 ```
 total_global <- sum(df_site_zone$Total_particules, na.rm = TRUE)
 
@@ -179,7 +179,7 @@ for (i in 1:length(p_values)) {
 }
 ```
 
-# === Génération des lettres homogènes ===
+# Génération des lettres homogènes 
 ```
 lettres <- multcompLetters(p_matrix < 0.05)$Letters
 
@@ -211,7 +211,7 @@ print("Comparaisons significatives entre zones (p.adj < 0.05) :")
 print(comparaisons_significatives)
 ```
 
-# === Pourcentage par type de profondeur pour chaque site ===
+# Pourcentage par type de profondeur pour chaque site
 Cette partie n'a pas été utilisé dans les résultats mais est tout de même gardé au cas ou 
 
 ```
@@ -245,7 +245,7 @@ df_long_profondeur$Zone <- factor(df_long_profondeur$Zone,
 # Palette personnalisée pour les profondeurs
 palette_profondeur <- c( "Sup à 40m" = "#1f78b4","Inf à 40m" = "#e31a1c")
 
-# === Barplot empilé pourcentage par type de particule par station ===
+# Barplot empilé pourcentage par type de particule par station
 ggplot(df_long_profondeur, aes(x = Zone, y = Pourcentage, fill = Profondeur)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = palette_profondeur) +
@@ -255,14 +255,14 @@ ggplot(df_long_profondeur, aes(x = Zone, y = Pourcentage, fill = Profondeur)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# === Graphique : Répartition des particules (100% cumulé sur toutes les zones) ===
+# Graphique : Répartition des particules (100% cumulé sur toutes les zones) 
 # Calcul de la position des annotations au-dessus des barres
 positions <- df_global_pourcent %>%
   group_by(Zone) %>%
   summarise(Proportion_totale = sum(Proportion_globale)) %>%
   left_join(lettres_df, by = "Zone")
 
-# === Affichage du graphique avec les lettres homogènes ===
+# Affichage du graphique avec les lettres homogènes
 ggplot(df_global_pourcent, aes(x = Zone, y = Proportion_globale, fill = Site)) +
   geom_bar(stat = "identity", position = "stack") +
   theme_minimal() +
